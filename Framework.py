@@ -1,4 +1,3 @@
-# Framework
 # import extensions
 from ultralytics import YOLO
 import cv2
@@ -18,22 +17,26 @@ cap_rear.set(4, 480)
 
 # input the models
 models = [
-    YOLO("yolov5n.pt"),
-    #YOLO("yolov5n.pt")
-    # model_traffic_light
-    # model_traffic_sign
-    # model_line_detection    
+    YOLO("yolov8n.pt"),
+    YOLO("path to traffic sign model.pt"),
+    YOLO("path to traffic light model.pt"),
+    YOLO("path to zebra crossing model.pt") 
     
 ]
 # classes for each model usually number of classes
 classes_list = [
-    [0, 1, 2]
-    #[2]         
+    [0, 1 ,2],
+    [0, 1, 2, 3, 4],
+    [0, 1],     
+    [0]    
 ]
 # names of classes for each model
 class_names_list = [
-    ["person","car", "car"]
-    #["car"]
+    ["person", "nothing", "car"],
+    ["10", "20", "30", "Parking", "Pedestrian"],
+    ["green", "red"],
+    ["crossing"]
+
               
 ]
 # returns the classname for a specific index of the class
@@ -70,19 +73,25 @@ while True:
 
             for box in boxes:
                 
+                # dislays confidence
+                confidence = math.ceil((box.conf[0] * 100)) / 100
+                # adding condition for confidence
+                if confidence < 0.4:
+                    continue
+                print("Confidence = ", confidence)
+
                 # prints confidence
                 x1, y1, x2, y2 = map(int, box.xyxy[0])
                 cv2.rectangle(img_front, (x1, y1), (x2, y2), (255, 0, 255), 3)
                 print()
 
-                # dislays confidence
-                confidence = math.ceil((box.conf[0] * 100)) / 100
-                print("Confidence = ", confidence)
-
                 # prints name of class
                 cls = int(box.cls[0])
                 class_name = get_class_name(cls, model_index)
                 print("Class name = ", class_name)
+
+                if class_name not in ["car", "person","10", "20", "30", "Parking", "Pedestrian","green", "red", "crossing"]:
+                    continue
 
                 # useful later
                 if class_name == "car":
