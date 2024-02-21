@@ -19,7 +19,7 @@ class Traffic_Sign_Maneouvre:
             elif self.color="red":
                 if not is_moving():
                     continue
-                else:
+                elif is_moving() and y1<0.4: #arbitrary value
                     stop()
             else:
             print('the color of the traffic light is neither green or red') #debuging statement
