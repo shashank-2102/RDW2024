@@ -3,9 +3,7 @@ class Traffic_Sign_Maneouvre:
         self.color = "green"
         self.position = [0,0,0,0]
 
-
-    def traffic_light(self):
-    #input color, [x1,y1,x2,y2]
+        #input color, [x1,y1,x2,y2]
         
         #position check (make sure that we are not looking at a traffic light too far away)
         if y1<0.6 and y1>0.2 and x1>0.5: #relative positions for now
