@@ -1,7 +1,8 @@
 # import extensions
 from ultralytics import YOLO
 import cv2
-import math 
+import math
+from collections import deque
 
 # capture front and back camera
 cam_front_index = 0 # set index of front camera
@@ -14,6 +15,12 @@ cap_front.set(3, 640)
 cap_front.set(4, 480)
 cap_rear.set(3, 640)
 cap_rear.set(4, 480)
+
+#filter
+def combine_filter(buffer):
+    output = buffer
+    return output
+  
 
 # input the models
 models = [
@@ -53,23 +60,29 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 fontScale = 1
 color = (120, 120, 120)
 thickness = 1
+# buffer
+buffer_size = 10
+frame_buffer = deque(maxlen=buffer_size)
+output = {}
 
 # establish loop and read cameras
 while True:
     # success is a boolean that indicates if frame was read successfully img is the frame
     success_front, img_front = cap_front.read()
     success_rear, img_rear = cap_rear.read()
+    # removes any detections
+    objects_by_type = {}
     # model_index contains index, model is the actual model
     for model_index, model in enumerate(models):
         # apply model to frame
-        results_front = model(img_front, stream=True)
+        if model_index == 0:
+            results_front = model.predict(img_front, classes=[0, 2], save=True)
+        else:
+            results_front = model(img_front, stream=True)
 
         for results in results_front:
             # boxes gives coordinates of edges of box (bottom left and top right)
             boxes = results.boxes
-            # checks if class detected later
-            person_detected = False
-            front_car_detected = False
 
             for box in boxes:
                 
@@ -78,7 +91,6 @@ while True:
                 # adding condition for confidence
                 if confidence < 0.4:
                     continue
-                print("Confidence = ", confidence)
 
                 # prints confidence
                 x1, y1, x2, y2 = map(int, box.xyxy[0])
@@ -92,31 +104,21 @@ while True:
 
                 if class_name not in ["car", "person","10", "20", "30", "Parking", "Pedestrian","green", "red", "crossing"]:
                     continue
-
-                # useful later
-                if class_name == "car":
-                    front_car_detected = True
-                if class_name == "person":
-                    person_detected = True
-                    
-
                 org = [x1, y1]
                 
+                #extraction = [class_name, confidence, x1, y1, x2, y2]
+                extraction = [x1, y1, x2, y2]
+                if class_name in objects_by_type:
+                    objects_by_type[class_name].append(extraction)
+                else:
+                    objects_by_type[class_name] = [extraction]
+
                 # prints class and confidence on frame
                 text = f"{class_name}: {confidence:.2f}"
                 cv2.putText(img_front, text, (x1, y1 - 10), font, fontScale, color, thickness)
-
-    # prints if no detection is made: Useful later for implementing logic
-    if not person_detected:
-        print("person not detected")
-    if not front_car_detected:
-        print("car not detected")
-
         
     # results rear only checks model with car
     results_rear = models[0](img_rear, stream=True)
-    
-    rear_car_detected = False  # track if a car is detected
     # similar steps as in front camera
     for results in results_rear:
         boxes = results.boxes
@@ -124,27 +126,33 @@ while True:
             cls = int(box.cls[0])
             class_name = get_class_name(cls, 0)  # model index 0 corresponds to the first model
 
-            if class_name != "car":
-                continue  # skip to the next detection if the class is a person
 
-            rear_car_detected = True
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             confidence = math.ceil((box.conf[0] * 100)) / 100
             
             cv2.rectangle(img_rear, (x1, y1), (x2, y2), (255, 0, 255), 3)
             org = [x1, y1]
             
+            extraction = [ confidence, x1, y1, x2, y2]
+
+            if class_name in objects_by_type:
+                objects_by_type["rear_car"].append(extraction)
+            else:
+                objects_by_type["rear_car"] = [extraction]
 
             text = f"{class_name}: {confidence:.2f}"
             cv2.putText(img_rear, text, (x1, y1 - 10), font, fontScale, color, thickness)
 
-    if not rear_car_detected:
-        print("rear car not detected")       
+          
     
 
     #cv2.imshow('Rear Camera', img_rear)  # display rear camera feed in a window named 'Rear Camera'
     cv2.imshow('Front Camera', img_front) # display front camera feed in a window named 'Front Camera'
-    
+    frame_buffer.append(objects_by_type)
+    # If the desired number of frames was combined info is combined
+    if len(frame_buffer) == buffer_size:
+        output = combine_filter(frame_buffer)
+        frame_buffer.clear()
     if cv2.waitKey(1) == ord('q'):
         break
 
