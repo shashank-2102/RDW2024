@@ -1,7 +1,7 @@
 class Pedestrian_Maneouvre:
     
     _distance = 0
-    _Go = False
+    _TSpeed = False
     
     def __init__(self):
         self.pedestrian_sign_detected = False
@@ -13,7 +13,7 @@ class Pedestrian_Maneouvre:
         return self._distance
     
     def getTSpeed(self):
-        return self._Go
+        return self._TSpeed
     
         
     def pedestrian_sign(self):

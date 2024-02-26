@@ -1,4 +1,11 @@
 class Traffic_Sign_Maneouvre:
+    TSpeed = 0
+    Distance = 0
+    def getTSpeed(self):
+        return self.TSpeed
+
+    def getDistance(self):
+        return self.Distance
     def __init__(self):
         self.color = "green"
         self.position = [0,0,0,0]
