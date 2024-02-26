@@ -1,8 +1,20 @@
 class Pedestrian_Maneouvre:
+    
+    _distance = 0
+    _Go = False
+    
     def __init__(self):
         self.pedestrian_sign_detected = False
         self.pedestrian_detected = False
         self.pedestrian_crossing_detected = False
+
+
+    def getDistance(self):
+        return self._distance
+    
+    def getTSpeed(self):
+        return self._Go
+    
         
     def pedestrian_sign(self):
         
