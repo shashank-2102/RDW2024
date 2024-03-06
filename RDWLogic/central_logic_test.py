@@ -4,9 +4,11 @@ from central_logic import Func1
 class Test_Obstacle:
     _distance = 0
     _TSpeed = 0
-    def __init__(self, distance, TSpeed):
+    def __init__(self, distance, Speed):
         # Logic
         self.__lane_keeping_maneouvre = None
+        self._TSpeed = Speed
+        self._distance = distance
 
     def getTSpeed(self):
         return self._TSpeed
@@ -20,8 +22,7 @@ obstacle1 = Test_Obstacle(10, 50)
 obstacle2 = Test_Obstacle(20, 30)
 obstacle3 = Test_Obstacle(35, 40)
 
-
-
+print(obstacle1.getTSpeed())
 class func1_test(unittest.TestCase):
     def test_Func1_empty(self):
         # Empty object list
