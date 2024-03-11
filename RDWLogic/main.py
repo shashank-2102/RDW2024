@@ -5,10 +5,10 @@ from RT import RT
 
 if __name__ == "__main__":
 
-    process = RT("FOO")
+    process = RT()
     process.value = "BAR"
     print(process.value)
-    process = RT("a")
+    process = RT()
     print(process.value)
     #Need to make framwork and Logic work on distinct threads
     # IMPORTANT: Only allowed to query from the framework

@@ -1,4 +1,4 @@
-from RTSingletonMeta import RTSingletonMeta
+from RDWLogic.RTSingletonMeta import RTSingletonMeta
 
 class RT(metaclass=RTSingletonMeta):
     # write code that makes a private variable

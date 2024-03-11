@@ -1,6 +1,6 @@
 import unittest
-from central_logic import Func1
-
+from RDWLogic.central_Logic import Func1
+from RDWLogic.central_Logic import Final_Function
 class Test_Obstacle:
     _distance = 0
     _TSpeed = 0

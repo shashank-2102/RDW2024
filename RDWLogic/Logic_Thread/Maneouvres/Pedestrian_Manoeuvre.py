@@ -1,4 +1,5 @@
-#from RDWLogic.RT import RT
+from RDWLogic.RT import RT
+from RDWLogic.FrameWork_Thread.FrameWorkSingletonMeta import FrameWorkSingletonMeta
 class Pedestrian_Maneouvre:
     
     _distance = 0
@@ -8,7 +9,7 @@ class Pedestrian_Maneouvre:
         self.pedestrian_sign_detected = False
         self.pedestrian_detected = False
         self.pedestrian_crossing_detected = False
-        #self.RT = RT()
+        self.RT = RT()
 
 
     def getDistance(self):
