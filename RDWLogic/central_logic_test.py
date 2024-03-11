@@ -22,12 +22,11 @@ obstacle1 = Test_Obstacle(10, 50)
 obstacle2 = Test_Obstacle(20, 30)
 obstacle3 = Test_Obstacle(35, 40)
 
-print(obstacle1.getTSpeed())
 class func1_test(unittest.TestCase):
     def test_Func1_empty(self):
         # Empty object list
         objectList = []
-        self.assertEqual(Func1(objectList), [0, 0])
+        self.assertEqual(Func1(objectList), [0, float('inf')])
 
     def test_Func1_one(self):
         # Object list with one object
