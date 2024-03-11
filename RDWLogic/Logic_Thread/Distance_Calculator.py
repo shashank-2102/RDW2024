@@ -1,6 +1,6 @@
 # Given a frame, an area and different classes returns the closest class
 # input [[object name, coordinates], [object name, coordinates],...]
-def Calculate_Distance(objects):
+def Calculate_area(objects):
     closestobject = None
     maxarea = 0
     area = None
@@ -23,6 +23,7 @@ def Calculate_Distance(objects):
         else:
             print('other object detected') #debugging statement
     print(closestobject, maxarea)
-    return closestobject, maxarea
+    #return closestobject, maxarea
+    return maxarea
 
 Calculate_Distance([['traffic light',0.5,0.5,0.6,0.6],['speed sign',0.7,0.5,0.9,0.6],['zebra crossing',0.2,0.1,0.3,0.2]])
