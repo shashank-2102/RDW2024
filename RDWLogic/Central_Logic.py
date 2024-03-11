@@ -1,6 +1,8 @@
 def Func1(objectList):
     tSpeed = 0
-    lDistance = float('inf') 
+    lDistance = float('inf')
+
+    
     for obj in objectList:
         if obj.getDistance() < lDistance:
             lDistance = obj.getDistance()
@@ -9,9 +11,19 @@ def Func1(objectList):
     return [tSpeed, lDistance]
 
 
+def Final_Function(objectList, overtaking_mode:bool, lane_keeping):
+    
+    sAngle = lane_keeping.getsAngle()
 
-def Final_Function():
-    pass
+    if overtaking_mode:
+        tSpeed, lDistance = [123, 123]
+
+    else:
+        # Normal mode
+        tSpeed, lDistance = Func1(objectList)
+    
+
+    print(f"tSpeed: {tSpeed}, lDistance: {lDistance}, sAngle: {sAngle}, overtaking_mode: {overtaking_mode}")
 
 
 

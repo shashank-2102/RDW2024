@@ -1,5 +1,5 @@
 import unittest
-from central_logic import Func1
+from central_logic import Func1, Final_Function
 
 class Test_Obstacle:
     _distance = 0
@@ -24,7 +24,7 @@ obstacle3 = Test_Obstacle(35, 40)
 
 class func1_test(unittest.TestCase):
     def test_Func1_empty(self):
-        # Empty object list
+        # Empty object list - should return 0 speed and inf distance
         objectList = []
         self.assertEqual(Func1(objectList), [0, float('inf')])
 
@@ -39,7 +39,8 @@ class func1_test(unittest.TestCase):
         self.assertEqual(Func1(objectList), [50, 10])
 
     def test_Final_Function(self):
-        pass
+        objectList = [obstacle1, obstacle2, obstacle3]
+        Final_Function(objectList)
 
 
 if __name__ == '__main__':
