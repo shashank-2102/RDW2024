@@ -2,7 +2,7 @@
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./RDWLogic",
+        ".",
         "-p",
         "*test*.py"
     ],

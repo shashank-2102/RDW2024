@@ -4,18 +4,17 @@ class RT(metaclass=RTSingletonMeta):
     # write code that makes a private variable
     # called value and set it to None
     __value = None
-    def __init__(self, value):
-          self.__value = value
-
+    def __init__(self):
+        pass
 
     def get_velocity(self):
-        return 0
+        return 15
 
     def set_velocity(self, velocity):
         return 0
 
     def is_moving(self):
-        return False
+        return True
 
     def stop(self):
         return 0
