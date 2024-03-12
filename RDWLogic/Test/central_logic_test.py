@@ -1,5 +1,5 @@
 import unittest
-from central_logic import Func1
+from RDWLogic.central_Logic import Func1
 
 class Test_Obstacle:
     _distance = 0
