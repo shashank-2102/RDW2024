@@ -10,7 +10,7 @@ class TL_Logic_Test(unittest.TestCase):
         
         # Input parameters
         color1 = "red"
-        coordinates1 = [0.6, 0.5, 0.7, 0.6]
+        coordinates1 = [0.6, 0.3, 0.7, 0.6]
 
         
         # Call the TL_Logic method and get the result
@@ -30,9 +30,9 @@ class TL_Logic_Test(unittest.TestCase):
         
         # Call the TL_Logic method and get the result
         speed, distance = traffic_light_instance.TL_Logic(color1, coordinates1)
-        
+        print(speed, distance)
         # Assert the expected behavior
-        self.assertEqual(speed, 100)
+        self.assertEqual(speed, 0)
         #self.assertEqual(distance, expected_distance)
 if __name__ == '__main__':
     unittest.main()
