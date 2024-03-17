@@ -1,3 +1,4 @@
+from Distance_Calculator import Calculate_area
 from RDWLogic.RT import RT
 class Traffic_Light:
     _distance = 0
@@ -29,7 +30,7 @@ class Traffic_Light:
 
                 else:
 
-                    self._TSpeed = 100
+                    self._TSpeed = 10
                     self.RT.get_velocity()
                 #if car is not moving, find last speed limit and tell car to go at that speed limit
 
@@ -38,10 +39,11 @@ class Traffic_Light:
                     pass
 
                 elif self.RT.is_moving() and y1<0.4: #arbitrary value
-                    self._TSpeed = 69
+                    self._TSpeed = 10
                 print(y1)
             else:
                 print('the color of the traffic light is neither green or red') #debuging statement
+            self._distance = Calculate_area(['traffic light',x1,y1,x2,y2])
             return self._TSpeed, self._distance
         
 
