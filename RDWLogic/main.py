@@ -7,25 +7,29 @@ from central_Logic import Func1
 from time import sleep
 
 def framework():
+    for i in range(10):
+        print(1)
+        sleep(1)
     #Here call the framework
     # framework = FrameWork1()
     # framework.run()
     pass
 def  logic():
+    for i in range(10):
+        print(2)
+        sleep(1)
     # Here call main logic
     # logic = RT()
     pass
 
 
 if __name__ == "__main__":
-    print(1)
+
 
     Thread(target = framework).start()
     Thread(target = logic).start()
 
 
-    #Need to make framwork and Logic work on distinct threads
-    # IMPORTANT: Only allowed to query from the framework
 
 
 def check_update():

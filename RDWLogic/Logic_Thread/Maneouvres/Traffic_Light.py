@@ -1,4 +1,4 @@
-from Distance_Calculator import Calculate_area
+# from Distance_Calculator import Calculate_area
 from RDWLogic.RT import RT
 class Traffic_Light:
     _distance = 0
@@ -8,6 +8,8 @@ class Traffic_Light:
         self.__lane_keeping_maneouvre = None
         self.RT = RT()
 
+    def MEW(self):
+        return self._TSpeed
 
     def getTSpeed(self):
         return self._TSpeed
