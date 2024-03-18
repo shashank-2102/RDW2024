@@ -1,5 +1,5 @@
 import unittest
-from Logic_Thread.Maneouvres.Speed_Limit import Speed_Limit
+from Speed_Limit import Speed_Limit
 #from RDWLogic.RT import RT
 
 class SL_Logic_Test(unittest.TestCase):

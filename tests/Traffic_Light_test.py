@@ -1,5 +1,5 @@
 import unittest
-from Logic_Thread.Maneouvres.Traffic_Light import Traffic_Light
+from Traffic_Light import Traffic_Light
 #from RDWLogic.RT import RT
 
 class TL_Logic_Test(unittest.TestCase):
