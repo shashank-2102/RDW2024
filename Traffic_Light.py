@@ -1,5 +1,5 @@
 # from Distance_Calculator import Calculate_area
-from RDWLogic.RT import RT
+from RT import RT
 class Traffic_Light:
     _distance = 0
     _TSpeed = 0

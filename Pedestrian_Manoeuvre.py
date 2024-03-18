@@ -1,5 +1,5 @@
-from RDWLogic.RT import RT
-from RDWLogic.FrameWork_Thread.FrameWorkSingletonMeta import FrameWorkSingletonMeta
+from RT import RT
+from FrameWorkSingletonMeta import FrameWorkSingletonMeta
 class Pedestrian_Maneouvre:
     
     _distance = 0

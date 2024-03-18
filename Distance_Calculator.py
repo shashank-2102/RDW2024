@@ -26,4 +26,4 @@ def Calculate_area(objects):
     #return closestobject, maxarea
     return maxarea
 
-Calculate_Distance([['traffic light',0.5,0.5,0.6,0.6],['speed sign',0.7,0.5,0.9,0.6],['zebra crossing',0.2,0.1,0.3,0.2]])
+Calculate_area([['traffic light',0.5,0.5,0.6,0.6],['speed sign',0.7,0.5,0.9,0.6],['zebra crossing',0.2,0.1,0.3,0.2]])
