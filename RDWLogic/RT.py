@@ -15,7 +15,7 @@ class RT(metaclass=RTSingletonMeta):
         return self.velocity
 
     def set_velocity(self, velocity):
-        return 0
+        return velocity
 
     def is_moving(self):
         return self.is_moving
