@@ -1,5 +1,6 @@
 import unittest
-from central_Logic import priorityDecider
+from central_Logic import priorityDecider, finalFunction
+from Lane_Keeping_Maneouvre import Lane_Keeping_Maneouvre
 
 class Test_Obstacle:
     _distance = 0
@@ -22,7 +23,7 @@ obstacle1 = Test_Obstacle(10, 50)
 obstacle2 = Test_Obstacle(20, 30)
 obstacle3 = Test_Obstacle(35, 40)
 
-class func1_test(unittest.TestCase):
+class priorityDecider_test(unittest.TestCase):
     def test_Func1_empty(self):
         # Empty object list
         objectList = []
@@ -37,9 +38,17 @@ class func1_test(unittest.TestCase):
         # Object list with multiple objects
         objectList = [obstacle1, obstacle2, obstacle3]
         self.assertEqual(priorityDecider(objectList), [50, 10])
+    
+class finalFunction_test(unittest.TestCase):
+    def test_finalFunction_test(self):
+        objectList = [obstacle1]
+        lane_keeping = Lane_Keeping_Maneouvre()
+        self.assertEqual(finalFunction(objectList, False, lane_keeping), [50, 10, 0])
 
-    def test_Final_Function(self):
-        pass
+    #add test cases
+
+
+    
 
 
 if __name__ == '__main__':

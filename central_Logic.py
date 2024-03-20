@@ -11,12 +11,13 @@ def priorityDecider(objectList):
     return [tSpeed, lDistance]
 
 
-def Final_Function(objectList, overtaking_mode:bool, lane_keeping):
+def finalFunction(objectList, overtaking_mode:bool, lane_keeping):
     
     sAngle = lane_keeping.getsAngle()
 
     if overtaking_mode:
         tSpeed, lDistance = [123, 123]
+        sAngle = 0
 
     else:
         # Normal mode
@@ -24,6 +25,7 @@ def Final_Function(objectList, overtaking_mode:bool, lane_keeping):
     
 
     print(f"tSpeed: {tSpeed}, lDistance: {lDistance}, sAngle: {sAngle}, overtaking_mode: {overtaking_mode}")
+    return [tSpeed, lDistance, sAngle]
 
 
 
