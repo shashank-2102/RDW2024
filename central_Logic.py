@@ -1,4 +1,4 @@
-def Func1(objectList):
+def priorityDecider(objectList):
     tSpeed = 0
     lDistance = float('inf')
 
@@ -20,7 +20,7 @@ def Final_Function(objectList, overtaking_mode:bool, lane_keeping):
 
     else:
         # Normal mode
-        tSpeed, lDistance = Func1(objectList)
+        tSpeed, lDistance = priorityDecider(objectList)
     
 
     print(f"tSpeed: {tSpeed}, lDistance: {lDistance}, sAngle: {sAngle}, overtaking_mode: {overtaking_mode}")

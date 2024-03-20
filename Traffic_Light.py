@@ -1,15 +1,14 @@
-# from Distance_Calculator import Calculate_area
+from Distance_Calculator import Calculate_area
 from RT import RT
+
 class Traffic_Light:
     _distance = 0
     _TSpeed = 0
+    
     def __init__(self):
         # Logic
         self.__lane_keeping_maneouvre = None
         self.RT = RT()
-
-    def MEW(self):
-        return self._TSpeed
 
     def getTSpeed(self):
         return self._TSpeed
@@ -32,8 +31,8 @@ class Traffic_Light:
 
                 else:
 
-                    self._TSpeed = 10
-                    self.RT.get_velocity()
+                    self._TSpeed = 0
+                    #self.RT.get_velocity()
                 #if car is not moving, find last speed limit and tell car to go at that speed limit
 
             elif color == "red":
@@ -41,13 +40,21 @@ class Traffic_Light:
                     pass
 
                 elif self.RT.is_moving() and y1<0.4: #arbitrary value
-                    self._TSpeed = 10
-                print(y1)
+                    self._TSpeed = 0
+
             else:
                 print('the color of the traffic light is neither green or red') #debuging statement
-            self._distance = Calculate_area(['traffic light',x1,y1,x2,y2])
-            return self._TSpeed, self._distance
+            
+            self._distance = Calculate_area(['traffic light',x1,y1,x2,y2])[0]
+           
+            #print(self._TSpeed, self._distance)
+            return [self._TSpeed, self._distance]
         
 
 
-
+# from tests.Speed_limit_test import SL_Logic_Test
+# # Instantiate Traffic_Light
+# traffic_light_instance = Traffic_Light()
+# color1 = "green"
+# coordinates1 = [0.6, 0.5, 0.7, 0.6]
+# traffic_light_instance.TL_Logic(color1, coordinates1)
