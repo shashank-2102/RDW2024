@@ -98,7 +98,7 @@ class Pedestrian_Maneouvre:
         else:
             print('no pedestrian crossing or pedestrian sign detected')
             pass
-        return self._TSpeed, self._distance
+        return [self._TSpeed, self._distance]
             
             
                 
