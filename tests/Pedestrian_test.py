@@ -1,6 +1,6 @@
 import unittest
 from Pedestrian_Manoeuvre import Pedestrian_Maneouvre
-#from RDWLogic.RT import RT
+from RT import RT
 
 class PD_Logic_Test(unittest.TestCase):
     
