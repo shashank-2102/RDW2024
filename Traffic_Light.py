@@ -25,36 +25,31 @@ class Traffic_Light:
         if y1 < 0.6 and y1 > 0.2 and x1 > 0.5: #relative positions for now
 
             if color == "green":
-                if self.RT.is_moving(): ###this needs to be changed to a function that can get the velocity of the car
-
+                if self.RT.is_moving_TF: ###this needs to be changed to a function that can get the velocity of the car
                     pass
 
                 else:
-
-                    self._TSpeed = 0
-                    #self.RT.get_velocity()
+                    self._TSpeed = 10
                 #if car is not moving, find last speed limit and tell car to go at that speed limit
 
             elif color == "red":
-                if not self.RT.is_moving():
+                if not self.RT.is_moving_TF:
                     pass
-
-                elif self.RT.is_moving() and y1<0.4: #arbitrary value
+                elif self.RT.is_moving_TF and y1<0.4: #arbitrary value
                     self._TSpeed = 0
 
             else:
                 print('the color of the traffic light is neither green or red') #debuging statement
             
             self._distance = Calculate_area(['traffic light',x1,y1,x2,y2])[0]
-           
+            
             #print(self._TSpeed, self._distance)
             return [self._TSpeed, self._distance]
         
 
 
-# from tests.Speed_limit_test import SL_Logic_Test
-# # Instantiate Traffic_Light
 # traffic_light_instance = Traffic_Light()
-# color1 = "green"
-# coordinates1 = [0.6, 0.5, 0.7, 0.6]
-# traffic_light_instance.TL_Logic(color1, coordinates1)
+# color2 = "green"
+# coordinates2 = [0.6, 0.3, 0.7, 0.5]
+# traffic_light_instance.TL_Logic(color2, coordinates2)
+# print(traffic_light_instance.TL_Logic(color2, coordinates2))
