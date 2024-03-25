@@ -45,12 +45,13 @@ class Speed_Limit:
                                              objects_by_type['20'][2],objects_by_type['20'][3]])[0]
         else:
             self.speed_limit_detected = False
-            #self.tSpeed = tSpeed
+            self.tSpeed = tSpeed
             # if -1 it is not detected
             #self.distance = Distance
 
         # print(self.tSpeed, self.distance, self.speed_limit_detected)
-        return [self.tSpeed, self.distance, self.speed_limit_detected]
+        #return [self.tSpeed, self.distance, self.speed_limit_detected]
+        return [self.tSpeed, self.speed_limit_detected]
 
 
 # data = {
