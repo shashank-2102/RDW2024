@@ -43,62 +43,33 @@ class Pedestrian_Maneouvre:
             self.pedestrian_crossing_detected = True
         return self.pedestrian_crossing_detected
     
-    #def pedestrian_logic(self):
+    def pedestrian_logic(self, pedestrian_detected, pedestrian_sign_detected, pedestrian_crossing_detected):
     
-    #    if not self.pedestrian_detected:
-    #        if False: #self.RT.is_moving():
-    #            pass
-    #        else:
-    #            self._TSpeed =  50
-    #            #self._TSpeed =  self.RT.get_velocity()   #no pedestrian found, keep moving or start moving
-
-    #    elif self.pedestrian_sign_detected:   
-    #        if True: #self.RT.is_moving() and y1<0.4:    #arbitrary value
-    #            self._TSpeed = 0
-    #            #self._TSpeed = 0
-    #        elif False: #not self.RT.is_moving():
-    #            pass    #pedestrian found and pedestrian sign found, stop if the car is within a distance
-            
-    #    elif self.pedestrian_crossing_detected:
-    #        if self.RT.is_moving() and y3<0.4:    #arbitrary value
-    #            self._TSpeed = 0
-    #            #self._TSpeed = 0
-    #        elif not self.RT.is_moving():
-    #            pass    #pedestrian found and pedestrian crossing found, stop if the car is within a distance
-        
-    #    else:
-    #        print('no pedestrian crossing or pedestrian sign detected')
-    #        pass
-    #    return self._TSpeed, self._distance
-    
-    # For unittesting, result1,2,3 stand for results of check
-    def pedestrian_logic(self, result1, result2, result3):
-    
-        if not result1:
-            if True: #self.RT.is_moving():
-                self._TSpeed =  50
-            elif False:
+        if not pedestrian_detected:
+            if False: #self.RT.is_moving():
                 pass
+            else:
+                self._TSpeed =  50
                 #self._TSpeed =  self.RT.get_velocity()   #no pedestrian found, keep moving or start moving
 
-        elif result2:  
+        elif pedestrian_sign_detected:   
             if True: #self.RT.is_moving() and y1<0.4:    #arbitrary value
                 self._TSpeed = 0
                 #self._TSpeed = 0
             elif False: #not self.RT.is_moving():
                 pass    #pedestrian found and pedestrian sign found, stop if the car is within a distance
             
-        elif result3:
-            if True: #self.RT.is_moving() and y3<0.4:    #arbitrary value
+        elif pedestrian_crossing_detected:
+            if self.RT.is_moving() and y3<0.4:    #arbitrary value
                 self._TSpeed = 0
                 #self._TSpeed = 0
-            elif False: #not self.RT.is_moving():
+            elif not self.RT.is_moving():
                 pass    #pedestrian found and pedestrian crossing found, stop if the car is within a distance
         
         else:
             print('no pedestrian crossing or pedestrian sign detected')
             pass
-        return [self._TSpeed, self._distance]
+        return self._TSpeed, self._distance
             
             
                 
