@@ -1,4 +1,4 @@
-from Distance_Calculator import Calculate_area
+from Area_Calculator import Calculate_area
 from RT import RT
 
 class Traffic_Light:

@@ -1,5 +1,5 @@
 import unittest
-from Distance_Calculator import Calculate_area
+from Area_Calculator import Calculate_area
 
 class TestCalculateArea(unittest.TestCase):
     def test_traffic_light(self):

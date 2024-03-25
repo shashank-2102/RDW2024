@@ -1,4 +1,4 @@
-from Distance_Calculator import Calculate_area
+from Area_Calculator import Calculate_area
 
 class Speed_Limit:
 
