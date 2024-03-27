@@ -104,7 +104,7 @@ while True:
     for model_index, model in enumerate(models):
         # apply model to frame
         if model_index == 0:
-            results_front = model.predict(img_front, classes=[0, 2], save=True)
+            results_front = model.predict(img_front, classes=[0, 2], save=False)
         else:
             results_front = model(img_front, stream=True)
 
@@ -159,7 +159,7 @@ while True:
     frame_buffer.append(objects_by_type)
     # If the desired number of frames was combined info is combined
     if len(frame_buffer) == buffer_size:
-        output = combine_filter(frame_buffer)
+        output = combine_filter(frame_buffer) # output of the code
         frame_buffer.clear()
     if keyboard.is_pressed('q'):
         break
