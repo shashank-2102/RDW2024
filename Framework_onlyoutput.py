@@ -5,12 +5,14 @@ from collections import Counter
 import cv2
 import math 
 import keyboard
+import multiprocessing
+import time
 
 # capture front and back camera
-cam_front_index = 0 # set index of front camera
+cam_front_index = "videos\\30 Minutes of Cars Driving By in 2009.mp4" # set index of front camera
 cam_rear_index = 1 # set index of rear camera
-cap_front = cv2.VideoCapture("C:\\Users\\Jandl\\Downloads\\WhatsApp Video 2024-03-11 at 17.10.40.mp4")
-cap_rear = cv2.VideoCapture(cam_rear_index)
+cap_front = cv2.VideoCapture(cam_front_index) # capture front camera
+cap_rear = cv2.VideoCapture(cam_rear_index) # capture rear camera
 
 # setting width and height of camera (pixels)
 cap_front.set(3, 640)
@@ -64,10 +66,10 @@ def get_class_name(index, model_index):
 
 # input the models
 models = [
-    YOLO("yolov8n.pt"),
-    YOLO("C:\\Users\\Jandl\\Downloads\\trafficlightv1.pt"),
-    YOLO("C:\\Users\\Jandl\\Downloads\\trafficlightv1.pt"),
-    YOLO("C:\\Users\\Jandl\\Downloads\\trafficlightv1.pt") 
+    YOLO("Models\\yolov8n.pt"),
+    # YOLO("Models\\traffic_light_v1.pt"), ########
+    # YOLO("Models\\traffic_light_v1.pt"),
+    # YOLO("Models\\zebra_crossing.pt") 
     
 ]
 # classes for each model usually number of classes
@@ -160,6 +162,7 @@ while True:
     # If the desired number of frames was combined info is combined
     if len(frame_buffer) == buffer_size:
         output = combine_filter(frame_buffer) # output of the code
+        print(output)
         frame_buffer.clear()
     if keyboard.is_pressed('q'):
         break
