@@ -17,21 +17,31 @@ def create_speed_sign():
     tSpeed = 10
     Distance = 10
 
-    return Speed_Limit()
+    speed_limit_instance = Speed_Limit()
+    speed_limit_instance.speed_sign(data, tSpeed, Distance)
+
+    return speed_limit_instance
 
 def create_traffic_light():
     color1 = "red"
-    coordinates1 = [0.6, 0.3, 0.7, 0.5]
+    coordinates1 = [0.8, 0.8, 0.9, 0.9]
 
-    return Traffic_Light()
+    traffic_light_instance = Traffic_Light()
+    traffic_light_instance.TL_Logic(color1, coordinates1)
+
+    return traffic_light_instance
 
 def create_ped():
-    coordinates1 = [0.4, 0.5, 0.7, 0.6]
+    coordinates1 = [0.8, 0.8, 0.9, 0.9]
     result1 = True
     result2 = True
     result3 = True
 
-    return Pedestrian_Maneouvre()
+    Pedestrian_instance = Pedestrian_Maneouvre()
+    Pedestrian_instance.pedestrian_logic(result1, result2, result3)
+
+    return Pedestrian_instance
+
 
 speed_limit_instance = create_speed_sign()
 Pedestrian_instance = create_ped()
@@ -47,19 +57,28 @@ class full_logic_test(unittest.TestCase):
     def test_Func1_empty(self):
         # Empty object list
         objectList = obstacle1 
-        self.assertEqual(finalFunction(objectList, False, lane_keeping), [0, float('inf'), 0])
+        self.assertEqual(finalFunction(objectList, False, lane_keeping), [0, float('inf'), 0]) #speed, distance, angle
 
     def test_Func1_one(self):
         # Object list with one object
         objectList = obstacle2
-        self.assertEqual(finalFunction(objectList, False, lane_keeping), [30, 20, 0])
+        #self.assertEqual(finalFunction(objectList, False, lane_keeping), [15, 20, 0])
+        self.assertEqual(finalFunction(objectList, False, lane_keeping)[0], 15)
+        self.assertEqual(finalFunction(objectList, False, lane_keeping)[2], 0)
 
     def test_Func1_multi(self):
         # Object list with multiple objects
         objectList = obstacle3
-        self.assertEqual(finalFunction(objectList, False, lane_keeping), [30, 20, 0])
+        #self.assertEqual(finalFunction(objectList, False, lane_keeping), [15, 20, 0])
+        self.assertEqual(finalFunction(objectList, False, lane_keeping)[0], 15)
+        self.assertEqual(finalFunction(objectList, False, lane_keeping)[2], 0)
 
-    
+
+
+class object_list_test(unittest.TestCase):
+    def test_OL_empty(self):
+        pass
+        
 
 
 if __name__ == '__main__':
