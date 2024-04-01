@@ -1,14 +1,14 @@
 from RT import RT
 from FrameWorkSingletonMeta import FrameWorkSingletonMeta
+from central_Logic import updateObjectList
 class Pedestrian_Maneouvre:
-    
-    _distance = 0
-    _TSpeed = False
     
     def __init__(self):
         self.pedestrian_sign_detected = False
         self.pedestrian_detected = False
         self.pedestrian_crossing_detected = False
+        self._distance = 0
+        self._TSpeed = False
         self.RT = RT()
 
 
@@ -69,6 +69,7 @@ class Pedestrian_Maneouvre:
         else:
             print('no pedestrian crossing or pedestrian sign detected')
             pass
+        updateObjectList(self)
         return [self._TSpeed, self._distance]
             
             

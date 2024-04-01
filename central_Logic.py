@@ -1,3 +1,12 @@
+# Global 
+objectList = []
+
+
+def updateObjectList(obj, remove=False):
+    global objectList
+    objectList.append(obj)
+
+
 def priorityDecider(objectList):
     tSpeed = 0
     lDistance = float('inf')

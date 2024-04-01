@@ -40,8 +40,13 @@ class priorityDecider_test(unittest.TestCase):
         self.assertEqual(priorityDecider(objectList), [50, 10])
     
 class finalFunction_test(unittest.TestCase):
-    def test_finalFunction_test(self):
-        objectList = [obstacle1]
+    def test_finalFunction_single_test(self):
+        objectList = [obstacle2]
+        lane_keeping = Lane_Keeping_Maneouvre()
+        self.assertEqual(finalFunction(objectList, False, lane_keeping), [30, 20, 0])
+
+    def test_finalFunction_multi_test(self):
+        objectList = [obstacle1, obstacle2, obstacle3]
         lane_keeping = Lane_Keeping_Maneouvre()
         self.assertEqual(finalFunction(objectList, False, lane_keeping), [50, 10, 0])
 

@@ -6,7 +6,7 @@ import cv2
 import math 
 
 # capture front and back camera
-cam_front_index = 0 # set index of front camera
+cam_front_index =1 # set index of front camera
 cam_rear_index = 1 # set index of rear camera
 cap_front = cv2.VideoCapture(cam_front_index) # capture front camera
 cap_rear = cv2.VideoCapture(cam_rear_index) # capture rear camera
@@ -57,10 +57,10 @@ def combine_filter(buffer):
 
 # input the models
 models = [
-    YOLO("yolov8n.pt"),
-    YOLO("C:\\Users\\Jandl\\Downloads\\trafficsignv1.pt"),
-    YOLO("C:\\Users\\Jandl\\Downloads\\trafficlightv1.pt"),
-    YOLO("C:\\Users\\Jandl\\Downloads\\Best.pt") 
+    YOLO("Models\\yolov8n.pt"),
+    # YOLO("Models\\traffic_light_v1.pt"), ########
+    # YOLO("Models\\traffic_light_v1.pt"),
+    # YOLO("Models\\zebra_crossing.pt") 
     
 ]
 # classes for each model usually number of classes

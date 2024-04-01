@@ -1,13 +1,13 @@
 from Area_Calculator import Calculate_area
 from RT import RT
-
+from central_Logic import updateObjectList
 class Traffic_Light:
-    _distance = 0
-    _TSpeed = 0
-    
+
     def __init__(self):
         # Logic
         self.__lane_keeping_maneouvre = None
+        self._TSpeed = 0
+        self._distance = 0
         self.RT = RT()
 
     def getTSpeed(self):
@@ -44,6 +44,7 @@ class Traffic_Light:
             self._distance = Calculate_area(['traffic light',x1,y1,x2,y2])[0]
             
             #print(self._TSpeed, self._distance)
+            updateObjectList(self)
             return [self._TSpeed, self._distance]
         
 
