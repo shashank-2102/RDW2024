@@ -6,6 +6,13 @@ def updateObjectList(obj, remove=False):
     global objectList
     objectList.append(obj)
 
+def clearObjectList():
+    global objectList
+    objectList = []
+
+def getObjectList():
+    global objectList
+    return objectList
 
 def priorityDecider(objectList):
     tSpeed = 0
@@ -24,7 +31,7 @@ def finalFunction(objectList, overtaking_mode:bool, lane_keeping):
     
     sAngle = lane_keeping.getsAngle()
 
-    if overtaking_mode:
+    if overtaking_mode: #complete
         tSpeed, lDistance = [123, 123]
         sAngle = 0
 

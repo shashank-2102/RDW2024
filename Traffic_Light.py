@@ -47,6 +47,10 @@ class Traffic_Light:
             updateObjectList(self)
             return [self._TSpeed, self._distance]
         
+        #################TEMP#################
+        else:
+            updateObjectList(self)
+        #################TEMP#################
 
 
 # traffic_light_instance = Traffic_Light()
