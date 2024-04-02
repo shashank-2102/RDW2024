@@ -60,7 +60,7 @@ class Pedestrian_Maneouvre:
                 pass    #pedestrian found and pedestrian sign found, stop if the car is within a distance
             
         elif pedestrian_crossing_detected:
-            if self.RT.is_moving() and y3<0.4:    #arbitrary value
+            if True:    #arbitrary value
                 self._TSpeed = 0
                 #self._TSpeed = 0
             elif not self.RT.is_moving():
