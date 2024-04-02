@@ -6,7 +6,7 @@ import time
 from ultralytics import YOLO
 from collections import deque
 from collections import Counter
-from central_Logic import receive_data 
+from central_Logic import receive_data
 #from rec import receive_data 
 
 # capture front and back camera
@@ -86,11 +86,12 @@ output = {}
 
 def send_data(queue):
     while True:
-        print("Sending data")
+        pass
+        #print("Sending data")
         #output = combine_filter(frame_buffer)
         #queue.put(output)
         #frame_buffer.clear()
-        time.sleep(0.5)  # Adjust sleep time to control sending rate
+        #time.sleep(0.5)  
 
 if __name__ == '__main__':
     print("Creating queue")

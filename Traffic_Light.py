@@ -1,6 +1,6 @@
 from Area_Calculator import Calculate_area
 from RT import RT
-from central_Logic import updateObjectList
+#from central_Logic import updateObjectList
 class Traffic_Light:
 
     def __init__(self):
@@ -21,7 +21,7 @@ class Traffic_Light:
     def  TL_Logic(self, color, coordinates):
         x1,y1,x2,y2 = coordinates
         #position check (make sure that we are not looking at a traffic light too far away)
-
+        print("logic works")
         if y1 < 0.6 and y1 > 0.2 and x1 > 0.5: #relative positions for now
 
             if color == "green":
@@ -44,12 +44,13 @@ class Traffic_Light:
             self._distance = Calculate_area(['traffic light',x1,y1,x2,y2])[0]
             
             #print(self._TSpeed, self._distance)
-            updateObjectList(self)
+            #updateObjectList(self)
             return [self._TSpeed, self._distance]
         
         #################TEMP#################
         else:
-            updateObjectList(self)
+            #updateObjectList(self)
+            pass
         #################TEMP#################
 
 

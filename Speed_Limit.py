@@ -1,5 +1,5 @@
 from Area_Calculator import Calculate_area
-from central_Logic import updateObjectList
+#from central_Logic import updateObjectList
 class Speed_Limit:
     def __init__(self):
         self._TSpeed = 0
@@ -48,7 +48,7 @@ class Speed_Limit:
 
         # print(self.tSpeed, self.distance, self.speed_limit_detected)
         #return [self.tSpeed, self.distance, self.speed_limit_detected]
-        updateObjectList(self)
+        #updateObjectList(self)
         return [self._TSpeed, self.speed_limit_detected]
 
 

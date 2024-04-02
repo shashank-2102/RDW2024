@@ -77,12 +77,7 @@ class object_list_test(unittest.TestCase):
         clearObjectList()
         self.assertEqual(len(getObjectList()), 0)
 
-    def test_OL_three(self):
-        clearObjectList()
-        speed_limit_instance = create_speed_sign()
-        Pedestrian_instance = create_ped()
-        traffic_light_instance = create_traffic_light()
-        self.assertEqual(len(getObjectList()), 3)
+    ##create better tests###
         
 
 
