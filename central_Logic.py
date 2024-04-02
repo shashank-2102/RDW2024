@@ -55,8 +55,23 @@ def receive_data(queue):
         save_data(data)
 
 def process_data(data):
-    # Add your data processing logic here
-    print("Processing received data:", data)
+    actions = {
+        'person': lambda value: print("Person at:", value),
+        'crossing': lambda value: print("Crossing at:", value),
+        '10': lambda value: print("Speed 10 at:", value),
+        '15': lambda value: print("Speed 15 at:", value),
+        '20': lambda value: print("Speed 20 at:", value),
+        'red': lambda value: print("Red TL at:", value),
+        'green': lambda value: print("Green TL at:", value),
+        'car': lambda value: print("Car at:", value),
+        'rear_car': lambda value: print("Rear car at:", value)
+    }
+    for key, value in data.items():
+        if key in actions:
+            actions[key](value)
+        else:
+            print(f"Unrecognized key: {key}")
+
 
 def save_data(data):
     with open("output1.txt", "a") as file:
