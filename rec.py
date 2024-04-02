@@ -1,6 +1,6 @@
 import multiprocessing
 
-
+################### MOVED TO CENTRAL LOGIC ###################
 
 def receive_data(queue):
     while True:
@@ -15,7 +15,7 @@ def process_data(data):
     print("Processing received data:", data)
 
 def save_data(data):
-    with open("output.txt", "a") as file:
+    with open("output1.txt", "a") as file:
         file.write(str(data) + "\n")
 
 

@@ -6,7 +6,8 @@ import time
 from ultralytics import YOLO
 from collections import deque
 from collections import Counter
-from rec import receive_data  
+from central_Logic import receive_data 
+#from rec import receive_data 
 
 # capture front and back camera
 cam_front_index = "videos\\30 Minutes of Cars Driving By in 2009.mp4"  # set index of front camera
