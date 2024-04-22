@@ -52,29 +52,30 @@ def receive_data(queue):
     while True:
         data = queue.get() 
         print("Received data:", data)  
-        process_data(data)
+        process_data_temp(data)
+        #process_data(data)
         #save_data(data)
 
-# def process_data(data):
-#     actions = {
-#         'person': lambda value: print("Person at:", value),
-#         'crossing': lambda value: print("Crossing at:", value),
-#         '10': lambda value: print("Speed 10 at:", value),
-#         '15': lambda value: print("Speed 15 at:", value),
-#         '20': lambda value: print("Speed 20 at:", value),
-#         'red': lambda value: (traffic_light_instance.TL_Logic('red', value), updateObjectList(traffic_light_instance)),
-#         'green': lambda value: (traffic_light_instance.TL_Logic('green', value), updateObjectList(traffic_light_instance), print(getObjectList())),
-#         'car': lambda value: print("Car at:", value),
-#         'rear_car': lambda value: print("Rear car at:", value)
-#     }
-#     for key, value in data.items():
-#         if key in actions:
-#             if value:  # Check if the list is not empty
-#                 actions[key](value)
-#         else:
-#             print(f"Unrecognized key: {key}")
-        
 def process_data(data):
+    actions = {
+        'person': lambda value: (pedestrian_instance.pedestrian_logic(value), updateObjectList(pedestrian_instance)),
+        'crossing': lambda value: (pedestrian_instance.pedestrian_logic(value), updateObjectList(pedestrian_instance)),
+        '10': lambda value: (speed_limit_instance.speed_sign(10, value), updateObjectList(speed_limit_instance)),
+        '15': lambda value: (speed_limit_instance.speed_sign(15, value), updateObjectList(speed_limit_instance)),
+        '20': lambda value: (speed_limit_instance.speed_sign(20, value), updateObjectList(speed_limit_instance)),
+        'red': lambda value: (traffic_light_instance.TL_Logic('red', value), updateObjectList(traffic_light_instance)),
+        'green': lambda value: (traffic_light_instance.TL_Logic('green', value), updateObjectList(traffic_light_instance), print(getObjectList())),
+        'car': lambda value: print("Car at:", value), #overtaking
+        'rear_car': lambda value: print("Rear car at:", value) #overtaking
+    }
+    for key, value in data.items():
+        if key in actions:
+            if value:  # Check if the list is not empty
+                actions[key](value)
+        else:
+            print(f"Unrecognized key: {key}")
+        
+def process_data_temp(data):
     actions = {
         'person': lambda value: print("Person at:", value),
         'crossing': lambda value: print("Crossing at:", value),
