@@ -108,7 +108,6 @@ def save_data(data):
         file.write(str(data) + "\n")
 
 
-
 if __name__ == "__main__":
     
     traffic_light_instance = Traffic_Light()
