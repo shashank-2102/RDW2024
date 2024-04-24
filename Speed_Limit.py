@@ -44,6 +44,7 @@ class Speed_Limit:
         # print(self.tSpeed, self.distance, self.speed_limit_detected)
         #return [self.tSpeed, self.distance, self.speed_limit_detected]
         #updateObjectList(self)
+        self._distance = 0
         return [self._TSpeed, self._distance]
 
 
