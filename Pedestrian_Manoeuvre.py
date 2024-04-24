@@ -6,7 +6,7 @@ class Pedestrian_Maneouvre:
     
     def __init__(self):
         self.pedestrian_detected = False
-        self.pedestrian_crossing_detected = False
+        self.crossing_detected = False
         self._distance = 0
         self._TSpeed = 0
         self.RT = RT()
@@ -17,24 +17,31 @@ class Pedestrian_Maneouvre:
     def getTSpeed(self):
         return self._TSpeed
             
-    def pedestrian_check(self, coordinates):
-        x1, y1, x2, y2 = coordinates
-        
-        #to make sure that we are not looking at a pedestrian too far away
-        if y1<0.6 and y1>0.2 and x1>0.5:  #relative positions for now
-            self.pedestrian_detected = True
-        return self.pedestrian_detected
+    def person_logic(self, coordinates):
+        if len(coordinates) != 4:
+            print("NO COORDS")
+        else:
+            x1, y1, x2, y2 = coordinates
+            
+            self._distance = Calculate_area(['zebra crossing',x1,y1,x2,y2])[0]
+            #to make sure that we are not looking at a pedestrian too far away
+            if y1<0.6 and y1>0.2 and x1>0.5:  #relative positions for now
+                self.pedestrian_detected = True
+            return [self.pedestrian_detected, self._distance]
     
-    def pedestrian_crossing_check(self, coordinates):
-        x3, y3, x4, y4 = coordinates
-        
-        self._distance = Calculate_area(['zebra crossing',x3,y3,x4,y4])[0]
-        #to make sure that we are not looking at a pedestrian crossing too far away
-        if y3<0.6 and y3>0.2 and x3>0.5:  #relative positions for now
-            self.pedestrian_crossing_detected = True
-        return self.pedestrian_crossing_detected
+    def crossing_logic(self, coordinates):
+        if len(coordinates) != 4:
+            print("NO COORDS")
+        else:
+            x1, y1, x2, y2 = coordinates
+            
+            self._distance = Calculate_area(['zebra crossing',x1,y1,x2,y2])[0]
+            #to make sure that we are not looking at a pedestrian too far away
+            if y1<0.6 and y1>0.2 and x1>0.5:  #relative positions for now
+                self.crossing_detected = True
+            return [self.crossing_detected, self._distance]
     
-    def pedestrian_logic(self, pedestrian_detected, pedestrian_crossing_detected):
+    def pedestrian_logic(self, pedestrian_detected, crossing_detected):
     
         if not pedestrian_detected:
             if False: #self.RT.is_moving():
@@ -43,7 +50,7 @@ class Pedestrian_Maneouvre:
                 self._TSpeed =  50
                 #self._TSpeed =  self.RT.get_velocity()   #no pedestrian found, keep moving or start moving
             
-        elif pedestrian_crossing_detected:
+        elif crossing_detected:
             if True:    #arbitrary value
                 self._TSpeed = 0
                 #self._TSpeed = 0
@@ -54,7 +61,7 @@ class Pedestrian_Maneouvre:
             print('no pedestrian crossing or pedestrian sign detected')
             pass
         #updateObjectList(self)
-        return [self._TSpeed, self._distance]
+        return self._TSpeed
             
             
                 

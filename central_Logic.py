@@ -59,8 +59,8 @@ def receive_data(queue):
 def process_data(data):
     for key, value in data.items():
         actions = {
-        'person': lambda value: (pedestrian_instance.pedestrian_logic(value), updateObjectList(pedestrian_instance)),
-        'crossing': lambda value: (pedestrian_instance.pedestrian_logic(value), updateObjectList(pedestrian_instance)),
+        'person': lambda value: (pedestrian_instance.person_logic(value), updateObjectList(pedestrian_instance)),
+        'crossing': lambda value: (pedestrian_instance.crossing_logic(value), updateObjectList(pedestrian_instance)),
         '10': lambda value: (speed_limit_instance.speed_sign(10, value), updateObjectList(speed_limit_instance)),
         '15': lambda value: (speed_limit_instance.speed_sign(15, value), updateObjectList(speed_limit_instance)),
         '20': lambda value: (speed_limit_instance.speed_sign(20, value), updateObjectList(speed_limit_instance)),
