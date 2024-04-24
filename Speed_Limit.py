@@ -43,10 +43,11 @@ class Speed_Limit:
                 # if -1 it is not detected
                 #self.distance = Distance
 
-            # print(self.tSpeed, self.distance, self.speed_limit_detected)
-            #return [self.tSpeed, self.distance, self.speed_limit_detected]
-            #updateObjectList(self)
-            return [self._TSpeed, self._distance]
+        # print(self.tSpeed, self.distance, self.speed_limit_detected)
+        #return [self.tSpeed, self.distance, self.speed_limit_detected]
+        #updateObjectList(self)
+        self._distance = 0
+        return [self._TSpeed, self._distance]
 
 
 # data = {
