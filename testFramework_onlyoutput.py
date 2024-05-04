@@ -13,7 +13,7 @@ import torch
 #from rec import receive_data 
 
 # capture front and back camera
-cam_front_index = "videos\\30 Minutes of Cars Driving By in 2009.mp4"  # set index of front camera
+cam_front_index = "videos\[4K] HAWAII - WAIKIKI Beach - On the Beach - Another beautiful day for people watching!.mp4"  # set index of front camera
 cam_rear_index = 0 #\"videos\\30 Minutes of Cars Driving By in 2009.mp4"  # set index of rear camera
 cap_front = cv2.VideoCapture(cam_front_index)  # capture front camera
 cap_rear = cv2.VideoCapture(cam_rear_index)  # capture rear camera

@@ -32,7 +32,7 @@ def priorityDecider(objectList):
         if obj.getDistance() < lDistance:
             lDistance = obj.getDistance()
             tSpeed = obj.getTSpeed()
-
+    print("PP", tSpeed, lDistance)
     return [tSpeed, lDistance]
 
 def finalFunction(objectList, overtaking_mode:bool, lane_keeping):
@@ -52,8 +52,8 @@ def receive_data(queue):
     while True:
         data = queue.get() 
         print("Received data:", data)  
-        process_data_temp(data)
-        #process_data(data)
+        #process_data_temp(data)
+        process_data(data)
         #save_data(data)
 
 def process_data(data):
@@ -74,7 +74,11 @@ def process_data(data):
                 actions[key](value)
         else:
             print(f"Unrecognized key: {key}")
+    print("Object List:", getObjectList())
+    priorityDecider(getObjectList())
     clearObjectList()
+    print("Object List after clearing:", getObjectList())
+
         
 def process_data_temp(data):
     for key, value in data.items():
