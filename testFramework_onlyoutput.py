@@ -166,7 +166,7 @@ if __name__ == '__main__':
                 
                 extraction = [x1, y1, x2, y2]
 
-                if class_name in objects_by_type:
+                if "rear_car" in objects_by_type:
                     objects_by_type["rear_car"].append(extraction)
                 else:
                     objects_by_type["rear_car"] = [extraction]
