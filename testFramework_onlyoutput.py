@@ -7,11 +7,14 @@ from ultralytics import YOLO
 from collections import deque
 from collections import Counter
 from central_Logic import receive_data
+import torch
+
+
 #from rec import receive_data 
 
 # capture front and back camera
 cam_front_index = "videos\\30 Minutes of Cars Driving By in 2009.mp4"  # set index of front camera
-cam_rear_index = 0  # set index of rear camera
+cam_rear_index = 0 #\"videos\\30 Minutes of Cars Driving By in 2009.mp4"  # set index of rear camera
 cap_front = cv2.VideoCapture(cam_front_index)  # capture front camera
 cap_rear = cv2.VideoCapture(cam_rear_index)  # capture rear camera
 
@@ -95,6 +98,7 @@ def send_data(queue):
 
 if __name__ == '__main__':
     print("Creating queue")
+    print(torch.cuda.is_available())
     # Create a queue
     queue = multiprocessing.Queue()
     
@@ -117,7 +121,7 @@ if __name__ == '__main__':
         for model_index, model in enumerate(models):
             # apply model to frame
             if model_index == 0:
-                results_front = model.predict(img_front, classes=[0, 2], save=False)
+                results_front = model.predict(img_front, classes=[0, 2], save=False, verbose=False)
             else:
                 results_front = model(img_front, stream=True)
 
@@ -145,7 +149,7 @@ if __name__ == '__main__':
                         objects_by_type[class_name] = [extraction]
            
         # results rear only checks model with car
-        results_rear = models[0](img_rear, stream=True)
+        results_rear = models[0](img_rear, stream=True, verbose=False)
         
         # similar steps as in front camera
         for results in results_rear:
