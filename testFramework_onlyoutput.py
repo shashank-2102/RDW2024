@@ -13,8 +13,8 @@ import torch
 #from rec import receive_data 
 
 # capture front and back camera
-cam_front_index = "videos\[4K] HAWAII - WAIKIKI Beach - On the Beach - Another beautiful day for people watching!.mp4"  # set index of front camera
-cam_rear_index = 0 #\"videos\\30 Minutes of Cars Driving By in 2009.mp4"  # set index of rear camera
+cam_front_index = "videos\car_driving_city.mp4"  # set index of front camera
+cam_rear_index = "videos\car_driving_city.mp4"   # set index of rear camera
 cap_front = cv2.VideoCapture(cam_front_index)  # capture front camera
 cap_rear = cv2.VideoCapture(cam_rear_index)  # capture rear camera
 
@@ -68,10 +68,14 @@ def get_class_name(index, model_index):
         return 0
 
 # input the models
+
 models = [
     YOLO("Models\\yolov8n.pt"),
+    # YOLO("Models\\traffic_light_v1.pt"), 
+    # YOLO("Models\\traffic_light_v1.pt"),
+    # YOLO("Models\\zebra_crossing.pt") 
+    
 ]
-
 # classes for each model usually number of classes
 classes_list = [
     [0, 1, 2],
@@ -98,7 +102,7 @@ def send_data(queue):
 
 if __name__ == '__main__':
     print("Creating queue")
-    print(torch.cuda.is_available())
+    print( "CUDA", torch.cuda.is_available())
     # Create a queue
     queue = multiprocessing.Queue()
     
@@ -175,7 +179,7 @@ if __name__ == '__main__':
 
         if len(frame_buffer) == buffer_size:
             output = combine_filter(frame_buffer) # output of the code
-            print("internal ", output)
+            #print("internal ", output)
             queue.put(output)
             frame_buffer.clear()
         

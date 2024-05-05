@@ -32,21 +32,19 @@ def priorityDecider(objectList):
         if obj.getDistance() < lDistance:
             lDistance = obj.getDistance()
             tSpeed = obj.getTSpeed()
-    print("PP", tSpeed, lDistance)
     return [tSpeed, lDistance]
 
-def finalFunction(objectList, overtaking_mode:bool, lane_keeping):
-    sAngle = lane_keeping.getsAngle()
+def finalFunction(objectList, overtaking_mode:bool):
 
     if overtaking_mode: #complete
         tSpeed, lDistance = [123, 123]
-        sAngle = 0
+
     else:
         # Normal mode
         tSpeed, lDistance = priorityDecider(objectList)
 
-    print(f"tSpeed: {tSpeed}, lDistance: {lDistance}, sAngle: {sAngle}, overtaking_mode: {overtaking_mode}")
-    return [tSpeed, lDistance, sAngle]
+    print(f"tSpeed: {tSpeed}, lDistance: {lDistance}, overtaking_mode: {overtaking_mode}")
+    return [tSpeed, lDistance]
 
 def receive_data(queue):
     while True:
@@ -75,9 +73,9 @@ def process_data(data):
         else:
             print(f"Unrecognized key: {key}")
     print("Object List:", getObjectList())
-    priorityDecider(getObjectList())
+    finalFunction(getObjectList(), False)
     clearObjectList()
-    print("Object List after clearing:", getObjectList())
+    #print("Object List after clearing:", getObjectList())
 
         
 def process_data_temp(data):
@@ -105,8 +103,6 @@ def process_data_temp(data):
     clearObjectList()
     print("Object List after clearing:", getObjectList())
         
-
-
 def save_data(data):
     with open("output1.txt", "a") as file:
         file.write(str(data) + "\n")
