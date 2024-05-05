@@ -9,12 +9,9 @@ from collections import Counter
 from central_Logic import receive_data
 import torch
 
-
-#from rec import receive_data 
-
 # capture front and back camera
 cam_front_index = "videos\car_driving_city.mp4"  # set index of front camera
-cam_rear_index = "videos\car_driving_city.mp4"   # set index of rear camera
+cam_rear_index = 0   # set index of rear camera
 cap_front = cv2.VideoCapture(cam_front_index)  # capture front camera
 cap_rear = cv2.VideoCapture(cam_rear_index)  # capture rear camera
 
@@ -102,7 +99,7 @@ def send_data(queue):
 
 if __name__ == '__main__':
     print("Creating queue")
-    print( "CUDA", torch.cuda.is_available())
+    print("CUDA", torch.cuda.is_available())
     # Create a queue
     queue = multiprocessing.Queue()
     

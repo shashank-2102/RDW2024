@@ -1,6 +1,5 @@
 import multiprocessing
 from Traffic_Light import Traffic_Light
-from Lane_Keeping_Maneouvre import Lane_Keeping_Maneouvre
 from Pedestrian_Manoeuvre import Pedestrian_Maneouvre
 from Speed_Limit import Speed_Limit
 
@@ -37,7 +36,7 @@ def priorityDecider(objectList):
 def finalFunction(objectList, overtaking_mode:bool):
 
     if overtaking_mode: #complete
-        tSpeed, lDistance = [123, 123]
+        tSpeed, lDistance = [69, 69]
 
     else:
         # Normal mode
@@ -49,7 +48,7 @@ def finalFunction(objectList, overtaking_mode:bool):
 def receive_data(queue):
     while True:
         data = queue.get() 
-        print("Received data:", data)  
+        #print("Received data:", data)   #########ENABLE IF YOU WAN TO SEE RECIEVED DATA##########
         #process_data_temp(data)
         process_data(data)
         #save_data(data)

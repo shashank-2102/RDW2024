@@ -43,17 +43,16 @@ class finalFunction_test(unittest.TestCase):
     def test_finalFunction_single_test(self):
         objectList = [obstacle2]
         lane_keeping = Lane_Keeping_Maneouvre()
-        self.assertEqual(finalFunction(objectList, False, lane_keeping), [30, 20, 0])
+        self.assertEqual(finalFunction(objectList, False), [30, 20, 0])
 
     def test_finalFunction_multi_test(self):
         objectList = [obstacle1, obstacle2, obstacle3]
         lane_keeping = Lane_Keeping_Maneouvre()
-        self.assertEqual(finalFunction(objectList, False, lane_keeping), [50, 10, 0])
+        self.assertEqual(finalFunction(objectList, False), [50, 10, 0])
 
     #add test cases
 
 
-    
 
 
 if __name__ == '__main__':
