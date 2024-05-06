@@ -5,6 +5,7 @@ from Speed_Limit import Speed_Limit
 
 # Global :)
 objectList = []
+e_STOP = False ###########ADD LOGIC#############
 
 global traffic_light_instance, speed_limit_instance, pedestrian_instance
 traffic_light_instance = Traffic_Light()
@@ -33,17 +34,21 @@ def priorityDecider(objectList):
             tSpeed = obj.getTSpeed()
     return [tSpeed, lDistance]
 
-def finalFunction(objectList, overtaking_mode:bool):
+def get_e_STOP():
+    return e_STOP
 
+def finalFunction(objectList, overtaking_mode:bool, e_STOP:bool):
+    if e_STOP: 
+        return [0, 0, True]
+    
     if overtaking_mode: #complete
         tSpeed, lDistance = [69, 69]
-
     else:
         # Normal mode
         tSpeed, lDistance = priorityDecider(objectList)
 
-    print(f"tSpeed: {tSpeed}, lDistance: {lDistance}, overtaking_mode: {overtaking_mode}")
-    return [tSpeed, lDistance]
+    print(f"tSpeed: {tSpeed}, lDistance: {lDistance}, overtaking_mode: {overtaking_mode}, eSTOP: {e_STOP}")
+    return [tSpeed, lDistance, overtaking_mode, e_STOP]
 
 def receive_data(queue):
     while True:
@@ -72,7 +77,7 @@ def process_data(data):
         else:
             print(f"Unrecognized key: {key}")
     print("Object List:", getObjectList())
-    finalFunction(getObjectList(), False)
+    finalFunction(getObjectList(), False, get_e_STOP())
     clearObjectList()
     #print("Object List after clearing:", getObjectList())
 
