@@ -1,5 +1,7 @@
 import socket
 import struct
+import Speed
+import Steering
 
 # IP addy sender and receiver
 HOST = '127.0.0.1'  #localhost
@@ -63,13 +65,19 @@ data_format = {
   "Heartbeat_Orin": {"type": "Uint16", "value": 0},
 }
 
+Output = Speed.speed()
+Steering_angle = Steering
+Target_Velocity = Output[0] * 10
+Send_Mode = Output[1]
+Orin_Stop_Signal = Output[2]
+
 def get_test_data(): 
         data_test = {
-        "Target_Velocity*10": {"type": "Uint16", "value": 100},
+        "Target_Velocity*10": {"type": "Uint16", "value": Target_Velocity},
         "Target_SAngle+90": {"type": "Uint16", "value": 69},
-        "Send_Mode": {"type": "Uint8", "value": 1},
-        "Orin_Stop_Signal": {"type": "Uint8", "value": 0},
-        "Heartbeat_Orin": {"type": "Uint16", "value": 420},
+        "Send_Mode": {"type": "Uint8", "value": Send_Mode},
+        "Orin_Stop_Signal": {"type": "Uint8", "value": Orin_Stop_Signal},
+        "Heartbeat_Orin": {"type": "Uint16", "value": Steering_angle},
         }
         return data_test
         
