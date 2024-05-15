@@ -276,44 +276,47 @@ def distance(point, center_fit):
     return distance
 
 # Pipeline
-angle_values = []
+#angle_values = []
 #time_stamps = []
-font = cv2.FONT_HERSHEY_SIMPLEX
-smoothed_angle = 0
-MOV_AVG_LENGTH = 4
-mov_avg_left = []
-mov_avg_right = []
+#font = cv2.FONT_HERSHEY_SIMPLEX
+#smoothed_angle = 0
+#MOV_AVG_LENGTH = 4
+#mov_avg_left = []
+#mov_avg_right = []
 
 #cap = cv2.VideoCapture("C:\\Users\\Jandl\\Downloads\\project_video (1).mp4")
-cap = cv2.VideoCapture("C:\\Users\\Jandl\\Downloads\\HD1080_Standing_Lines.avi") # front camera capture
+#cap = cv2.VideoCapture("C:\\Users\\Jandl\\Downloads\\HD1080_Standing_Lines.avi") # fr
 
-#dt = time.time()
-
-
-# PID settings
-#dt = 0
-#start_time = time.time()
-
-c = Controller()
-
-while(True):
+def Steering(car_angle):
     #current_time = time.time()
-    car_angle = 90 # Import current angle from car
-    car_angle = car_angle - 90
-    car_angle = np.deg2rad(car_angle)
+    car_angle_deg = car_angle - 90
+    car_angle = np.deg2rad(car_angle_deg)
+    c = Controller()
+
+
+    # Pipeline
+    angle_values = []
+    #time_stamps = []
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    smoothed_angle = 0
+    MOV_AVG_LENGTH = 4
+    mov_avg_left = []
+    mov_avg_right = []
 
 
     #dt = float(round(current_time - start_time, 2))
+    #print(dt)
     
     #start_time = current_time  # Update start time for the next iteration
 
+    #-------------------------Color & Gradient Threshold------------------------ 
+    cap = cv2.VideoCapture("C:\\Users\\Jandl\\Downloads\\HD1080_Standing_Lines.avi") # fr
     ret, frame = cap.read()
     if ret is True: 
         image = cv2.resize(frame,(800,600),interpolation=cv2.INTER_AREA)
     else:
         print("Getting no frames")
-        break
-    #-------------------------Color & Gradient Threshold------------------------ 
+        return [-999]
     image = cut(image, 50)
     image = cv2.resize(image,(800,600),interpolation=cv2.INTER_AREA)
     height = image.shape[0]
@@ -327,6 +330,10 @@ while(True):
     img_b = BW1
     # source and destiantion points for the wrap
     src = np.array([[253, 272],[573, 272],[1233, 540], [-407, 540]])
+    #src = np.array([[303, 395],
+     #               [498, 378],
+      #              [777, 459],
+       #             [ 63, 494]])
     dst = np.float32([[0, 0], [530, 0], [530, 600], [0, 600]])
 
     
@@ -412,9 +419,30 @@ while(True):
     fb = c.feedback(angle, lateral_error)
     angle = ff + fb
     angle = np.rad2deg(angle)
-    angle = angle  - car_angle
+    #print(angle)
+    
+    
+
+    # Change not so big
+    anglediff = angle-current_angle
+    #print('anglediff = ', anglediff)
+    if abs(angle-car_angle_deg) > 1:
+        if anglediff > 0:
+            angle = current_angle+1
+        else:
+            angle = current_angle-1
+    
+    if angle > 30:
+        angle = 30
+    if angle < -30:
+        angle = -30
+
+    current_angle = angle
+
+    
     angle = int(angle  + 90) #conversion this will be returned
-    print(angle)
+
+    #print(angle)
     
     #ff = np.rad2deg(ff)
     #fb = np.rad2deg(fb)
@@ -430,5 +458,4 @@ while(True):
     #angle_values.append(angle)
     #time_stamps.append(current_time)
     #cv2.imshow('result', result)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    return angle
