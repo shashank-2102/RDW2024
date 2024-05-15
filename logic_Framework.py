@@ -358,7 +358,7 @@ def Crosswalk(image):
         ang = abs(np.arctan2(y2-y1, x2-x1))* 180 / np.pi
         #width = image.shape[1]
         #midpoint = width/2
-        print(ang)
+        #print(ang)
         #if ang > 30 and not any(abs(ang-angs[i]) < min_diff for i in range(len(angs))):
         #    filtered_final.append([x1,x2,y1,y2])
         #    angs.append(ang)
@@ -369,17 +369,15 @@ def Crosswalk(image):
 
     # Display the results
     h1 = []
-    print(zebra_final)
     if zebra_final != []:
         for crossing in zebra_final:
             h1.append(crossing[3])
-            print(h1)
         h1 = max(h1)
         sx1 = int(centre - 100)
         sy1 = int(h1)
         sx2 = int(centre + 100)
         sy2 = int(h1 - 20)
-        return sx1, sy1, sx2, sy2
+        return [sx1, sy1, sx2, sy2]
     else:
         return []
 
