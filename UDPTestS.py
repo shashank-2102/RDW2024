@@ -66,7 +66,7 @@ data_format = {
 }
 
 Output = Speed.speed()
-Steering_angle = Steering
+Steering_angle = 1
 Target_Velocity = Output[0] * 10
 Send_Mode = Output[1]
 Orin_Stop_Signal = Output[2]
