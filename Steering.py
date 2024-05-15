@@ -298,7 +298,7 @@ c = Controller()
 
 while(True):
     #current_time = time.time()
-    car_angle = 0 # Import current angle from car
+    car_angle = 90 # Import current angle from car
     car_angle = car_angle - 90
     car_angle = np.deg2rad(car_angle)
 
@@ -413,7 +413,7 @@ while(True):
     angle = ff + fb
     angle = np.rad2deg(angle)
     angle = angle  - car_angle
-    angle = angle  + 90 #conversion this will be returned
+    angle = int(angle  + 90) #conversion this will be returned
     print(angle)
     
     #ff = np.rad2deg(ff)
