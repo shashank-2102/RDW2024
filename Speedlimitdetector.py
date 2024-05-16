@@ -10,7 +10,7 @@ from collections import deque
 from collections import Counter
 from central_Logic import receive_data
 import torch
-model = YOLO("C:\\Users\\Jandl\\Downloads\\numberrec.pt")
+model = YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/numberrec.pt")
 
 
 def Euclidean_dist(v1=[0,0],v2=[0,0]):

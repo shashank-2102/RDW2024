@@ -11,10 +11,11 @@ from central_Logic import receive_data
 import torch
 import Speedlimitdetector
 import Crossing
+from timeit import default_timer as timer
 
 # capture front and back camera
-cam_front_index = 0   # set index of rear camera
-cam_rear_index = 1
+cam_front_index = r"/home/rdw_orin/Desktop/videos/30 Minutes of Cars Driving By in 2009.mp4"   # set index of rear camera
+cam_rear_index = r"/home/rdw_orin/Desktop/videos/30 Minutes of Cars Driving By in 2009.mp4"
 cap_front = cv2.VideoCapture(cam_front_index)  # capture front camera
 cap_rear = cv2.VideoCapture(cam_rear_index)  # capture rear camera
 
@@ -68,20 +69,20 @@ def get_class_name(index, model_index):
         return 0
 
 models = [
-    YOLO("Models\\yolov8n.pt"),
-    # YOLO("Models\\traffic_light_v1.pt"), 
+    YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/yolov8n.pt"),
+    YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/trafficlightv1.pt"), 
     # YOLO("Models\\traffic_light_v1.pt"),
     # YOLO("Models\\zebra_crossing.pt") 
     
 ]
 # classes for each model usually number of classes
 classes_list = [
-    [0, 1, 2],
+    [0, 1, 2], [0,1]
 ]
 
 # names of classes for each model
 class_names_list = [
-    ["person", "nothing", "car"],
+    ["person", "nothing", "car"], ["green","red"]
 ]
 
 #buffer
@@ -111,7 +112,7 @@ if __name__ == '__main__':
     # Start the receiver process
     receiver_process = multiprocessing.Process(target=receive_data, args=(queue,))
     receiver_process.start()
-
+    start = timer()
     while True:
         # success is a boolean that indicates if frame was read successfully img is the frame
         success_front, img_front = cap_front.read()
@@ -126,7 +127,7 @@ if __name__ == '__main__':
             if model_index == 0:
                 results_front = model.predict(img_front, classes=[0, 2], save=False, verbose=False)
             else:
-                results_front = model(img_front, stream=True)
+                results_front = model(img_front, stream=True,verbose=False)
 
             for results in results_front:
                 # boxes gives coordinates of edges of box (bottom left and top right)
@@ -214,4 +215,6 @@ if __name__ == '__main__':
             print("internal ", output)
             queue.put(output)
             frame_buffer.clear()
-        
+            end = timer()
+            print("time taken for", buffer_size, "frames:", end - start)
+            start = timer()
