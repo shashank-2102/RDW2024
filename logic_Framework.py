@@ -14,8 +14,15 @@ import Crossing
 from timeit import default_timer as timer
 
 # capture front and back camera
-cam_front_index = r"/home/rdw_orin/Desktop/videos/30 Minutes of Cars Driving By in 2009.mp4"   # set index of rear camera
-cam_rear_index = r"/home/rdw_orin/Desktop/videos/30 Minutes of Cars Driving By in 2009.mp4"
+Orin = True #makes it easier to switch between orin and pc
+
+if Orin:
+    cam_front_index = r"/home/rdw_orin/Desktop/videos/30 Minutes of Cars Driving By in 2009.mp4"   # set index of rear camera
+    cam_rear_index = r"/home/rdw_orin/Desktop/videos/30 Minutes of Cars Driving By in 2009.mp4"
+else:
+    cam_front_index = r"/home/rdw_orin/Desktop/videos/30 Minutes of Cars Driving By in 2009.mp4"   # set index of rear camera
+    cam_rear_index = r"/home/rdw_orin/Desktop/videos/30 Minutes of Cars Driving By in 2009.mp4"
+
 cap_front = cv2.VideoCapture(cam_front_index)  # capture front camera
 cap_rear = cv2.VideoCapture(cam_rear_index)  # capture rear camera
 
@@ -68,22 +75,42 @@ def get_class_name(index, model_index):
     else:
         return 0
 
-models = [
+if Orin:
+    models = [
+        YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/yolov8n.pt"),
+        YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/trafficlightv1.pt"), 
+        # YOLO("Models\\traffic_light_v1.pt"),
+        # YOLO("Models\\zebra_crossing.pt") 
+        
+    ]
+    # classes for each model usually number of classes
+    classes_list = [
+        [0, 1, 2], [0,1]
+    ]
+
+    # names of classes for each model
+    class_names_list = [
+        ["person", "nothing", "car"], ["green","red"]
+    ]
+else:
+    models = [
     YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/yolov8n.pt"),
     YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/trafficlightv1.pt"), 
     # YOLO("Models\\traffic_light_v1.pt"),
     # YOLO("Models\\zebra_crossing.pt") 
     
-]
-# classes for each model usually number of classes
-classes_list = [
-    [0, 1, 2], [0,1]
-]
+    ]
+    # classes for each model usually number of classes
+    classes_list = [
+        [0, 1, 2], [0,1]
+    ]
 
-# names of classes for each model
-class_names_list = [
-    ["person", "nothing", "car"], ["green","red"]
-]
+    # names of classes for each model
+    class_names_list = [
+        ["person", "nothing", "car"], ["green","red"]
+    ]
+
+
 
 #buffer
 buffer_size = 10

@@ -10,8 +10,12 @@ from collections import deque
 from collections import Counter
 from central_Logic import receive_data
 import torch
-model = YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/numberrec.pt")
 
+Orin = True
+if Orin:
+    model = YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/numberrec.pt")
+else:
+    model = YOLO(r"/home/rdw_orin/Desktop/RDW2024-Software-Structure/Models/numberrec.pt")
 
 def Euclidean_dist(v1=[0,0],v2=[0,0]):
     """Will calculate the Euclidean distance between two 2-dimensional vectors"""
