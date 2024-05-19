@@ -2,6 +2,10 @@ import socket
 import struct
 import Speed
 import Steering
+import random
+import time
+
+TESTING = True
 
 # IP addy sender and receiver
 HOST = '127.0.0.1'  #localhost
@@ -65,53 +69,53 @@ data_format = {
   "Heartbeat_Orin": {"type": "Uint16", "value": 0},
 }
 
-Output = Speed.speed()
-Steering_angle = Steering.Steering()
-Target_Velocity = Output[0] * 10
-Send_Mode = Output[1]
-Orin_Stop_Signal = Output[2]
+if TESTING:
+   pass
+else:
+  Output = Speed.speed()   
+  Steering_angle = Steering.Steering() 
+  Target_Velocity = Output[0] * 10 
+  Send_Mode = Output[1] 
+  Orin_Stop_Signal = Output[2] 
+  Heartbeat_Orin = 1 ##########FIX###########
 
 def get_test_data(): 
         data_test = {
         "Target_Velocity*10": {"type": "Uint16", "value": Target_Velocity},
-        "Target_SAngle+90": {"type": "Uint16", "value": 69},
+        "Target_SAngle+90": {"type": "Uint16", "value": Steering_angle},
         "Send_Mode": {"type": "Uint8", "value": Send_Mode},
         "Orin_Stop_Signal": {"type": "Uint8", "value": Orin_Stop_Signal},
-        "Heartbeat_Orin": {"type": "Uint16", "value": Steering_angle},
+        "Heartbeat_Orin": {"type": "Uint16", "value": Heartbeat_Orin},
         }
         return data_test
+
+
+def get_test_data_temp():
+    return {
+        "T_V": {"type": "Uint16", "value": random.randint(0, 250)},
+        "T_SA": {"type": "Uint16", "value": random.randint(0, 180)},
+        "S_M": {"type": "Uint8", "value": random.randint(0, 1)},
+        "S_S": {"type": "Uint8", "value": random.randint(0, 1)},
+        "Heartbeat_Orin": {"type": "Uint16", "value": 45},
+    }
         
 
 #send data
 while True:
-
-    data_to_send = get_test_data()
-    #User input
-    #   for key, value in data_format.items():
-    #     if value is not None:
-    #       try:
-    #         data_format[key]["value"] = int(input(f"{key}: "))
-    #       except ValueError:
-    #         print(f"Invalid input for {key}. Please enter an integer.")
-            
-
-    # use pack func
-    # data_bytes = pack_data(data_format)
+    data_to_send = get_test_data_temp()
     data_bytes = pack_data(data_to_send)
 
-    # send data
+    # Send data
     sock.sendto(data_bytes, (HOST, PORT))
 
-    # receive data
-    try:
-        received_data, addr = sock.recvfrom(1024)
-    except socket.timeout:
-        print("Timeout waiting for data")
-        continue
+    # Receive data
+    # try:
+    #     received_data, addr = sock.recvfrom(1024)
+    #     received_data_dict = unpack_data(received_data)
+    #     print(f"Received data: {received_data_dict}")
+    # except socket.timeout:
+    #     print("Timeout waiting for data")
 
-    # unpack received data
-    received_data_dict = unpack_data(received_data)
-
-
-    
+    # delay
+    time.sleep(1)    
 

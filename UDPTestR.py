@@ -2,7 +2,7 @@ import socket
 import struct
 
 # IP addy sender and receiver
-HOST = '127.0.0.1'  #localhost
+HOST = '127.0.0.1' #localhost
 PORT = 65432 #listner port
 
 # data format (same as the sender)
@@ -18,13 +18,12 @@ data_format = {
 def unpack_data(data):
   """
   Input: data: byte stream
-  Returns:dict with unpacked data
+  Returns: dict with unpacked data
   """
   unpacked_data = {}
 
   # Get the offset into the byte stream +++++++++++++
   offset = 0
-
 
   for key, value in data_format.items():
     # check types
@@ -44,26 +43,32 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Bind the socket to the address and port
 sock.bind((HOST, PORT))
+#sock.settimeout(10)
 
 print(f"UDP receiver listening on {HOST}:{PORT}")
 
 while True:
-  # receive data from sender
-  try:
-    data, addr = sock.recvfrom(1024)
-    print(f"Received data from {addr}")
+    try:
+        # receive data from sender
+        data, addr = sock.recvfrom(1024)
+        print(f"Received data from {addr}", flush=True)
 
-    # unpack
-    unpacked_data = unpack_data(data)
+        # Unpack
+        unpacked_data = unpack_data(data)
 
-    # TESTING: Print
-    print("Received data:")
-    for key, value in unpacked_data.items():
-      print(f"{key}: {value}")
+        print("Received data:", flush=True)
+        for key, value in unpacked_data.items():
+            print(f"{key}: {value}", flush=True)
 
-  except KeyboardInterrupt:
-    print("Exiting...")
-    break
+    except socket.timeout:
+        print("No data received, waiting...", flush=True)
+
+    except KeyboardInterrupt:
+        print("Exiting...", flush=True)
+        break
+    
+    except Exception as e:
+        print(f"An error occurred: {e}", flush=True)
 
 # socket close
 sock.close()
