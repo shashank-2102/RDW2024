@@ -6,7 +6,7 @@ import central_Logic
 def speed():
     speed_controller = Controller_speed()
 
-    tSpeed = central_Logic.finalFunction()[0] * 1000 / 3600
+    tSpeed = 0               #central_Logic.finalFunction()[0] * 1000 / 3600
     overtaking_mode = central_Logic.finalFunction()[2]
     e_STOP = central_Logic.finalFunction()[3]
                     

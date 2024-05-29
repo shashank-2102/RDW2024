@@ -73,8 +73,8 @@ if TESTING:
    pass
 else:
   Output = Speed.speed()   
-  Steering_angle = Steering.Steering() 
-  Target_Velocity = Output[0] * 10 
+  Steering_angle = Steering.Steering(0) 
+  Target_Velocity = Output[0]
   Send_Mode = Output[1] 
   Orin_Stop_Signal = Output[2] 
   Heartbeat_Orin = 1 ##########FIX###########

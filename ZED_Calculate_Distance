@@ -61,7 +61,7 @@ def calculate_value(original_value, fraction, max_value):
     scaled_value = original_value * (fraction / max_value)
     result = original_value - scaled_value
     return result
-def main():
+def distance_calculator(x1, x2, y1, y2, num_rows = 10, num_columns = 10):
     # Create a Camera object
     zed = sl.Camera()
 
@@ -90,8 +90,8 @@ def main():
     # mirror_ref = sl.Transform()
     # mirror_ref.set_translation(sl.Translation(2.75, 4.0, 0))
 
-    x1, y1 = 50, 50
-    x2, y2 = 400, 350
+    # x1, y1 = x1,
+    # x2, y2 = object[3], object[4]
 
     num_rows = 10
     num_columns = 10
@@ -134,11 +134,17 @@ def main():
                                              point_cloud_value[1] * point_cloud_value[1] +
                                              point_cloud_value[2] * point_cloud_value[2])
                         points[i, j] = distance
-                        print(points)
+                        # print(points)
 
                     else:
-                        print(f"ERROR: The distance can not be computed at {{{x};{y}}}")
+                        pass
+                        # print(f"ERROR: The distance can not be computed at {{{x};{y}}}")
             viewer.updateData(point_cloud)
+            flattened_arr = np.ravel(points)  # Flatten the 2D array into a 1D array
+            median = np.median(flattened_arr)
+            # print(points)
+            # return median
+            print(median)
 
 
 
@@ -149,5 +155,6 @@ def main():
     zed.close()
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "_main_":
+    distance_object = distance_calculator(50, 50, 400, 400, 10, 10)
+    print(distance_object)
